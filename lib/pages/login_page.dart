@@ -1,9 +1,19 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'package:flutter_full_course_project/utils/routes.dart';
 
-class LoginPage  extends StatelessWidget {
+class LoginPage  extends StatefulWidget {
 
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+   String name = "";
+   bool changeButtan = false;
+  
+  
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -15,7 +25,7 @@ class LoginPage  extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          Text("Welcome",
+          Text("Welcome $name",
           style: TextStyle(
             fontSize: 20,fontWeight: 
             FontWeight.bold),
@@ -25,31 +35,68 @@ class LoginPage  extends StatelessWidget {
             ),
            Padding(
              padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 32.0),
-             child: Column(
-              children: [
-                 TextFormField(
-                decoration:InputDecoration(
-                  hintText: "Enter username",
-                  labelText: "Username"
+             child: SingleChildScrollView(
+               child: Column(
+                children: [
+                   TextFormField(
+                  decoration:InputDecoration(
+                    hintText: "Enter username",
+                    labelText: "Username"
+                  ),
+                  onChanged: (value){
+                    setState(() {
+                      name = value;
+                    });
+                  },
                 ),
-              ),
-              TextFormField(
-                obscureText: true,
-                decoration:InputDecoration(
-                  hintText: "Enter password",
-                  labelText: "password"
+                TextFormField(
+                  obscureText: true,
+                  decoration:InputDecoration(
+                    hintText: "Enter password",
+                    labelText: "password"
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(onPressed: (){},
-               child: Text("Login"),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.red
+                SizedBox(
+                  height: 20,
                 ),
-              )
-              ],
+                  InkWell(
+                    onTap: (() async{
+                      setState(() {
+                        changeButtan =true;
+                      }); 
+                      await Future.delayed(Duration(seconds: 1)) ;
+                      Navigator.pushNamed(context,MyRoutes.homeRoute); 
+                    }),
+                    child: AnimatedContainer(
+                      duration: Duration(seconds: 1),
+                      width:changeButtan?50: 150,
+                      height: 50,
+                      alignment: Alignment.center,
+                      child:changeButtan?Icon(Icons.done,color: Colors.pink,):Text("Login",style: TextStyle(color: Colors.
+                      white,fontWeight: FontWeight.bold,
+                      fontSize: 18
+                      ),
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.deepPurple,
+                        // shape:changeButtan?BoxShape.circle:BoxShape.rectangle 
+                        borderRadius: BorderRadius.circular(changeButtan?50:8)
+                      ),
+                    ),
+                  )
+
+
+                
+                // ElevatedButton(onPressed: (){
+                //   Navigator.pushNamed(context,MyRoutes.homeRoute);            },
+                //  child: Text("Login"),
+                //   style: ElevatedButton.styleFrom(
+                //     primary: Colors.red,minimumSize: Size(120, 50),
+          
+                //   ),
+                // )
+                ],
+               ),
              ),
            )
         ],
