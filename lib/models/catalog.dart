@@ -1,13 +1,23 @@
+class catalogModel{
+static final items = [
+  Item(1,
+  "Iphon 13 pro", 
+  "Apple iphon 13th generation", 
+  1000, 
+  "#33505a", 
+  "assets/images/iPhone.jpg")];
+}
 
-class item {
-  final String id;
+
+class Item {
+  final int id;
   final String name;
   final String desc;
   final num  price;
   final String  color;
   final String image;
 
-  item(this.id, this.name, this.desc, this.price, this.color, this.image);
+  Item(this.id, this.name, this.desc, this.price, this.color, this.image,);
 }
 
 // final peoducts = [
